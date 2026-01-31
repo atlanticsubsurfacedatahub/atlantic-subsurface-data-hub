@@ -29,6 +29,8 @@ body{
 a{ color:inherit; text-decoration-color: rgba(232,238,252,.35); }
 a:hover{ text-decoration-color: rgba(232,238,252,.8); }
 
+.muted{ color: var(--muted); }
+
 .container{
   width: min(var(--max), calc(100% - 2rem));
   margin: 0 auto;
@@ -156,7 +158,22 @@ a:hover{ text-decoration-color: rgba(232,238,252,.8); }
 }
 
 .hero{
+  position: relative;
+  overflow: hidden;
   padding: 4.25rem 0 2.5rem;
+}
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  /* Replace hero-bg.svg with a photo (hero.webp / hero.jpg) when ready */
+  background:
+    linear-gradient(180deg, rgba(11,18,32,.82) 0%, rgba(11,18,32,.55) 55%, rgba(11,18,32,.90) 100%),
+    url("assets/hero-bg.svg") center/cover no-repeat;
+}
+.hero-inner{
+  position: relative;
+  z-index: 1;
 }
 .hero-inner{
   display:grid;
@@ -237,6 +254,32 @@ h1{
   margin-top: 1.6rem;
 }
 
+.gallery{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.1rem;
+  margin-top: 1.6rem;
+}
+.tile{
+  margin:0;
+  background: rgba(16,26,47,.55);
+  border: 1px solid rgba(232,238,252,.14);
+  border-radius: var(--radius);
+  overflow:hidden;
+}
+.tile img{
+  width:100%;
+  height: 200px;
+  object-fit: cover;
+  display:block;
+}
+.tile figcaption{
+  padding: .85rem 1rem 1rem;
+  color: rgba(232,238,252,.82);
+  font-weight: 650;
+}
+
+
 .panel{
   background: rgba(16,26,47,.55);
   border: 1px solid rgba(232,238,252,.14);
@@ -254,6 +297,16 @@ h1{
   color: rgba(232,238,252,.78);
 }
 .panel li{ margin:.35rem 0; }
+
+.panel-img{
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 1px solid rgba(232,238,252,.14);
+  background: rgba(232,238,252,.04);
+  margin-bottom: .9rem;
+}
 
 .callout{
   margin-top: 1.35rem;
@@ -334,6 +387,7 @@ h1{
   .grid-3{ grid-template-columns: 1fr; }
   .grid-2{ grid-template-columns: 1fr; }
   .contact-box{ grid-template-columns: 1fr; }
+  .gallery{ grid-template-columns: 1fr; }
   .brand{ min-width: unset; }
   .card-row{ grid-template-columns: 1fr; }
   .tag{ justify-content:flex-start; width: fit-content; }
